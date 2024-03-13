@@ -16,15 +16,20 @@ public class FabricaDaoTipos implements FabricaDao {
 	public FabricaDaoTipos(String configuracion) {
 		try {
 			String tipo;
+			String fichero;
 
 			Properties props = new Properties();
 			props.load(FabricaDaoTipos.class.getClassLoader().getResourceAsStream(configuracion));
 
 			tipo = props.getProperty("tipo");
+			fichero = props.getProperty("fichero");
+			
 
 			daoProducto = switch (tipo) {
 			case "arraylist" -> DaoProductoArrayList.getInstancia();
 			case "treemap" -> DaoProductoTreeMap.getInstancia();
+			case "csv" -> new DaoProductoCSV(fichero);
+			case "objetos" -> new DaoProductoFicheroObjetos(fichero);
 			default -> throw new DalException("NO se reconoce el tipo " + tipo);
 			};
 		} catch (Exception e) {
@@ -38,8 +43,7 @@ public class FabricaDaoTipos implements FabricaDao {
 	// METHOD HEREDADO
 	@Override
 	public DaoProducto getDaoProducto() {
-		// TODO Auto-generated method stub
-		return null;
+		return daoProducto;
 	}
 
 }

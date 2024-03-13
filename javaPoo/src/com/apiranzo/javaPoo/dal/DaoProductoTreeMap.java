@@ -10,14 +10,14 @@ import com.apiranzo.javaPoo.pojos.Producto;
 class DaoProductoTreeMap implements DaoProducto {
 
 	//Creamos una única instáncia de Productos que en este caso va a ser un TreeMap de Productos
-	private TreeMap<Long, Producto> productos = new TreeMap<>();
+	protected TreeMap<Long, Producto> productos = new TreeMap<>();
 
 	// SINGLETON
 	/**
 	 * Mediante el patrón de diseño SINGLETON damos forma a la instancia de DaoProductoArrayList
 	 * Esta va a ser única y inmutable 
 	 */
-	private DaoProductoTreeMap() {
+	protected DaoProductoTreeMap() {
 		productos.put(1L, new Producto(1L, "Producto2TM", new BigDecimal("1234"), 45, false));
 		productos.put(2L, new Producto(2L, "Producto2TM", new BigDecimal("1234"), 45, false));
 		productos.put(3L, new Producto(3L, "Producto3TM", new BigDecimal("321"), 33, true));

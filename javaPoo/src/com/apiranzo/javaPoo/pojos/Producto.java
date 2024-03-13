@@ -1,10 +1,13 @@
 package com.apiranzo.javaPoo.pojos;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Objects;
 
 // Creación de clase Producto
-public class Producto {
+public class Producto implements Serializable{
+
+	private static final long serialVersionUID = 8864116054745441681L;
 
 	// CONSTANTES 
 	public static final String NOMBRE_POR_DEFECTO = "PRODUCTO SIN DEFINIR";
