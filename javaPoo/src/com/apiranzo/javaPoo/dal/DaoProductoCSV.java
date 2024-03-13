@@ -128,7 +128,7 @@ public class DaoProductoCSV extends DaoProductoTreeMap{
 	public Producto insertar(Producto producto) {
 		leerFichero();
 		
-		Producto p = super.insertar(producto);
+		var p = super.insertar(producto);
 		
 		guardarFichero();
 		
