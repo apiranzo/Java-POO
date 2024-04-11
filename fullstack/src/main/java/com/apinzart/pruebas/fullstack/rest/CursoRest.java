@@ -1,6 +1,6 @@
 package com.apinzart.pruebas.fullstack.rest;
 
-import static com.ipartek.formaciones.fullstack.configuraciones.Globales.*;
+import static com.apinzart.pruebas.fullstack.configuraciones.Globales.*;
 
 import com.apinzart.pruebas.fullstack.dtos.CursoDto;
 

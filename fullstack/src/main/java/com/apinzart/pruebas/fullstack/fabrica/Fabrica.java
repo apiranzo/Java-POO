@@ -5,7 +5,7 @@ import com.apinzart.pruebas.fullstack.accesodatos.DaoCurso;
 
 public interface Fabrica {
 	
-//	DaoAlumno getDaoAlumno();
+	DaoAlumno getDaoAlumno();
 	DaoCurso getDaoCurso();
 
 }

@@ -24,7 +24,7 @@ public class Curso {
 	@NotBlank
 	private String nombre;
 	
-	@ManyToMany(mappedBy = "curso")
+	@ManyToMany
 	private Set<Alumno> alumnos;
 	
 	public Curso() {}

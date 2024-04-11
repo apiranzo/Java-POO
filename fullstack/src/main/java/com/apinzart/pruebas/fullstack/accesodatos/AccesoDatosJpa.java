@@ -11,7 +11,7 @@ import jakarta.persistence.Persistence;
 public class AccesoDatosJpa {
 	
 	private static final EntityManagerFactory entityManagerFactory = Persistence
-			.createEntityManagerFactory("com.ipartek.formacion.fullstack.entidades");
+			.createEntityManagerFactory("com.apinzart.pruebas.fullstack.entidades");
 			
 	public <T> T enTransaccion(Function<EntityManager, T> lambda) {
 		T resultado;
