@@ -3,6 +3,7 @@ package com.apinzart.pruebas.fullstack.entidades;
 import java.util.Objects;
 import java.util.Set;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -25,6 +26,7 @@ public class Curso {
 	private String nombre;
 	
 	@ManyToMany
+	@Column(unique = false)
 	private Set<Alumno> alumnos;
 	
 	public Curso() {}

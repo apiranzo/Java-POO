@@ -1,44 +1,64 @@
 package com.apinzart.pruebas.fullstack.accesodatos;
 
-import java.math.BigDecimal;
-
+import com.apinzart.pruebas.fullstack.dtos.AlumnoDto;
 import com.apinzart.pruebas.fullstack.entidades.Alumno;
 
 public class DaoAlumnoJpa extends AccesoDatosJpa implements DaoAlumno {
 
 	@Override
-	public Iterable<Alumno> obtenerTodos() {
-		return enTransaccion(em -> em.createQuery("select a from Alumno a", Alumno.class).getResultList());
+	public Iterable<AlumnoDto> obtenerTodos() {
+		return enTransaccion(
+				em -> em.createQuery("select a.id, a.nombre, a.apellido, a.fechaNacimiento, a.nota from Alumno a",
+						AlumnoDto.class).getResultList());
 
 	}
 
 	@Override
-	public Alumno obtenerPorId(Long id) {
-		return enTransaccion(em -> em.find(Alumno.class, id));
+	public AlumnoDto obtenerPorId(Long id) {
+		return enTransaccion(em -> em.createQuery(
+				"select a.id, a.nombre, a.apellido, a.fechaNacimiento, a.nota from Alumno a where a.id=:id",
+				AlumnoDto.class).setParameter("id", id).getSingleResult());
 	}
 
 	@Override
-	public Alumno insertar(Alumno alumno) {
-		
-		 enTransaccion(em -> {
-			 em.persist(alumno);
-			 return null;
-		 });
-		return alumno;
+	public AlumnoDto insertar(AlumnoDto alumno) {
+		return enTransaccion(em -> {
+			Alumno a = new Alumno(null, alumno.nombre(), alumno.apellido(), alumno.fechaNacimiento(), alumno.nota(),
+					null);
+			em.persist(a);
+			return new AlumnoDto(a.getId(), a.getNombre(), a.getApellido(), a.getFechaNacimiento(), a.getNota());
+		});
 	}
 
 	@Override
-	public Alumno modificar(Alumno alumno) {
-		return enTransaccion(em -> em.merge(alumno));
+	public AlumnoDto modificar(AlumnoDto alumno) {
+		return enTransaccion(em -> {
+			if (alumno.id() == null) {
+				throw new AccesoDatosException("Para modificar un alumno debes proporcionar el id");
+			}
+			Alumno a = new Alumno(alumno.id(), alumno.nombre(), alumno.apellido(), alumno.fechaNacimiento(),
+					alumno.nota(), null);
+
+			em.merge(a);
+			return new AlumnoDto(a.getId(), a.getNombre(), a.getApellido(), a.getFechaNacimiento(), a.getNota());
+		});
 	}
 
 	@Override
 	public void borrar(Long id) {
+		
 		enTransaccion(em -> {
 			em.remove(em.find(Alumno.class, id));
 			return null;
 		});
-		
+
+	}
+
+	@Override
+	public Iterable<AlumnoDto> obtenerAprobados() {
+		return enTransaccion(
+				em -> em.createQuery("select a.id, a.nombre, a.apellido, a.fechaNacimiento, a.nota from Alumno a where a.nota > 5",
+						AlumnoDto.class).getResultList());
 	}
 
 }

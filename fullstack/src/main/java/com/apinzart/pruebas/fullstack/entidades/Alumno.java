@@ -44,6 +44,7 @@ public class Alumno {
 	private BigDecimal nota;
 	
 	//Relación con un mappedBy porque coincidir - Relación del campo
+	@Column(unique = false)
 	@ManyToMany(mappedBy = "alumnos")
 	private Set<Curso> cursos;
 	

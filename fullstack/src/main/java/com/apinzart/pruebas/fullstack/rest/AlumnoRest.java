@@ -1,7 +1,8 @@
 package com.apinzart.pruebas.fullstack.rest;
 
-import com.apinzart.pruebas.fullstack.entidades.Alumno;
-import static com.apinzart.pruebas.fullstack.configuraciones.Globales.*;
+import static com.apinzart.pruebas.fullstack.configuraciones.Globales.daoAlumno;
+
+import com.apinzart.pruebas.fullstack.dtos.AlumnoDto;
 
 import jakarta.ws.rs.DELETE;
 import jakarta.ws.rs.GET;
@@ -14,24 +15,30 @@ import jakarta.ws.rs.PathParam;
 public class AlumnoRest {
 
 	@GET
-	public Iterable<Alumno> get() {
+	public Iterable<AlumnoDto> get() {
 		return daoAlumno.obtenerTodos();
 	}
-
+	
+/*	@GET
+	@Path("/aprobados")
+	public Iterable<Alumno> getAprobados() {
+		return daoAlumno.obtenerAprobados();
+	}
+*/
 	@GET
 	@Path("/{id}")
-	public Alumno getId(@PathParam("id") Long id) {
+	public AlumnoDto getId(@PathParam("id") Long id) {
 		return daoAlumno.obtenerPorId(id);
 	}
 
 	@POST
-	public Alumno post(Alumno alumno) {
+	public AlumnoDto post(AlumnoDto alumno) {
 		return daoAlumno.insertar(alumno);
 	}
 
 	@PUT
 	@Path("/{id}")
-	public Alumno put(@PathParam("id") Long id, Alumno alumno) {
+	public AlumnoDto put(@PathParam("id") Long id, AlumnoDto alumno) {
 		return daoAlumno.modificar(alumno);
 	}
 
