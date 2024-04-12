@@ -7,6 +7,14 @@ let ulAlumnos;
 let formInscripcion;
 let ulCursoAlumnos;
 
+// id de HTML
+let cabecera;
+let ofertaCursos;
+let listaAlumnos;
+let registroAlumnos;
+let infoCurso;
+
+
 window.addEventListener('DOMContentLoaded', async function(){
     ulCursos = document.querySelector('#listadoCursos');
     ulAlumnos = document.querySelector('#listadoAlumnos');
@@ -30,9 +38,9 @@ async function listadoCurso(cursos){
         const liCursos = document.createElement('li');
         liCursos.innerHTML = `${c.id} : ${c.nombre}
         
-            <a href="javascript:apuntarmeCurso(${c.id})">Apuntarme</a>
-            <a href="javascript:verAlumnosCurso(${c.id})">Ver Alumnos</a>;
-            <a href="javascript:verFichaCurso(${c.id})">Ver Ficha Curso</a>`;
+            <a class="btn btn-primary" href="javascript:apuntarmeCurso(${c.id})">Apuntarme</a>
+            <a class="btn btn-primary" href="javascript:verAlumnosCurso(${c.id})">Ver Alumnos</a>;
+            <a class="btn btn-primary" href="javascript:verFichaCurso(${c.id})">Ver Ficha Curso</a>`;
             
 		
         ulCursos.appendChild(liCursos);
@@ -99,4 +107,19 @@ async function verFichaCurso(id){
     const curso = await respuestaCurso.json();
     
     console.log(curso);
+    const fichaCurso = document.getElementById('fichaCurso');
+    fichaCurso.innerHTML = ``;
+    fichaCurso.innerHTML = `
+    <div class="card text-center mb-3" style="width: 18rem;">
+  <div class="card-body">
+    <h5 class="card-title">${curso.nombre}</h5>
+    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+    <a href="javascript:apuntarmeCurso(${curso.id})" class="btn btn-primary">Apuntarme</a>
+  </div>
+  <div class="card-footer">
+  <small><a href="javascript:verAlumnosCurso(${curso.id})">Ver Alumnos</a></small>
+  </div>
+</div>
+    
+    `;
 }
