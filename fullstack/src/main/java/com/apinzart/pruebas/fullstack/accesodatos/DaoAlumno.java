@@ -7,4 +7,5 @@ public interface DaoAlumno extends Dao<AlumnoDto> {
 	
 	Iterable<AlumnoDto> obtenerAprobados();
 
+	void apuntarseACurso(Long idAlumno, Long idCurso);
 }

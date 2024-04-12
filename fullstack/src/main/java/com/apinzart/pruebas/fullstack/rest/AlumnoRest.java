@@ -19,12 +19,12 @@ public class AlumnoRest {
 		return daoAlumno.obtenerTodos();
 	}
 	
-/*	@GET
+	@GET
 	@Path("/aprobados")
-	public Iterable<Alumno> getAprobados() {
+	public Iterable<AlumnoDto> getAprobados() {
 		return daoAlumno.obtenerAprobados();
 	}
-*/
+
 	@GET
 	@Path("/{id}")
 	public AlumnoDto getId(@PathParam("id") Long id) {

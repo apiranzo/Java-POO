@@ -10,8 +10,30 @@
 <body>
 	<h1>Gestor de cursos</h1>
 
-	<ul>
+	<ul id="listadoCursos">
+		<li>LISTADO CURSOS</li>
 
+	</ul>
+
+	<ul id="listadoAlumnos">
+		<li>LISTADO ALUMNOS</li>
+
+	</ul>
+
+	<form id="formInscripcion" action="javascript:apuntarme()">
+		<input id="cursoid" type="number">
+		<label for="nombre">Nombre</label>
+		<input type="text" name="nombre" id="nombre">
+		<label for="apellido">Apellido</label>
+		<input type="text" name="apellido" id="apellido">
+		<label for="fechaNacimiento">Fecha de nacimiento</label>
+		<input type="date" name="fechaNacimiento" id="fechaNacimiento">
+		
+		<button type="submit">Apuntarme</button>
+	</form>
+	
+	<h2 id="nombreCurso"></h2>
+	<ul id="cursoAlumnos">
 	</ul>
 	
 </body>
