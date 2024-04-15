@@ -64,7 +64,7 @@ public class DaoAlumnoJpa extends AccesoDatosJpa implements DaoAlumno {
 	@Override
 	public void apuntarseACurso(Long idAlumno, Long idCurso) {
 		enTransaccionVoid(em -> {
-			em.createNativeQuery("INSERT INTO cursos_alumnos (cursos_id, alumnos_id) VALUES (:idCurso, :idAlumno)").setParameter("idCurso", idCurso).setParameter("idAlumno", idAlumno).executeUpdate();
+			em.createNativeQuery("INSERT INTO curso_alumnos (cursos_id, alumnos_id) VALUES (:idCurso, :idAlumno)").setParameter("idCurso", idCurso).setParameter("idAlumno", idAlumno).executeUpdate();
 		});
 		
 	}

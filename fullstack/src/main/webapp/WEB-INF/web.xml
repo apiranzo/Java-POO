@@ -9,18 +9,27 @@
     <welcome-file>default.htm</welcome-file>
     <welcome-file>default.jsp</welcome-file>
   </welcome-file-list>
-  
   <servlet>
-		<servlet-name>serviciosrest</servlet-name>
-		<servlet-class>org.glassfish.jersey.servlet.ServletContainer</servlet-class>
-        <init-param>
-            <param-name>jersey.config.server.provider.packages</param-name>
-            <param-value>com.apinzart.pruebas.fullstack.rest</param-value>
-        </init-param>
-        <load-on-startup>1</load-on-startup>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>serviciosrest</servlet-name>
-		<url-pattern>/api/*</url-pattern>
-	</servlet-mapping>
+    <servlet-name>serviciosrest</servlet-name>
+    <servlet-class>org.glassfish.jersey.servlet.ServletContainer</servlet-class>
+    <init-param>
+      <param-name>jersey.config.server.provider.packages</param-name>
+      <param-value>com.apinzart.pruebas.fullstack.rest</param-value>
+    </init-param>
+    <load-on-startup>1</load-on-startup>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>serviciosrest</servlet-name>
+    <url-pattern>/api/*</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>ListadoCursosServlet</display-name>
+    <servlet-name>ListadoCursosServlet</servlet-name>
+    <servlet-class>com.apinzart.pruebas.fullstack.controlador.ListadoCursosServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ListadoCursosServlet</servlet-name>
+    <url-pattern>/ListadoCursosServlet</url-pattern>
+  </servlet-mapping>
 </web-app>
