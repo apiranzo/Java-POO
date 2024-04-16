@@ -1,6 +1,7 @@
 package com.apinzart.pruebas.fullstack.accesodatos;
 
 import com.apinzart.pruebas.fullstack.dtos.AlumnoDto;
+import com.apinzart.pruebas.fullstack.dtos.CursoDto;
 import com.apinzart.pruebas.fullstack.entidades.Alumno;
 
 public class DaoAlumnoJpa extends AccesoDatosJpa implements DaoAlumno {
@@ -36,8 +37,7 @@ public class DaoAlumnoJpa extends AccesoDatosJpa implements DaoAlumno {
 			if (alumno.id() == null) {
 				throw new AccesoDatosException("Para modificar un alumno debes proporcionar el id");
 			}
-			Alumno a = new Alumno(alumno.id(), alumno.nombre(), alumno.apellido(), alumno.fechaNacimiento(),
-					alumno.nota(), null);
+			Alumno a = new Alumno(alumno.id(), alumno.nombre(), alumno.apellido(), alumno.fechaNacimiento(), null, null);
 
 			em.merge(a);
 			return new AlumnoDto(a.getId(), a.getNombre(), a.getApellido(), a.getFechaNacimiento(), a.getNota());
@@ -67,6 +67,13 @@ public class DaoAlumnoJpa extends AccesoDatosJpa implements DaoAlumno {
 			em.createNativeQuery("INSERT INTO curso_alumnos (cursos_id, alumnos_id) VALUES (:idCurso, :idAlumno)").setParameter("idCurso", idCurso).setParameter("idAlumno", idAlumno).executeUpdate();
 		});
 		
+	}
+
+	@Override
+	public Iterable<CursoDto> cursosAlumno(Long id) {
+		return enTransaccion(em -> em.createQuery(
+				"select c.id, c.nombre from Curso c join c.alumnos a where a.id = :id",
+				CursoDto.class).setParameter("id", id).getResultList());
 	}
 	
 

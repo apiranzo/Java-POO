@@ -60,21 +60,18 @@
 
 		<div class="row g-5">
 			<div class="col-md-6">
-				<h2 class="text-body-emphasis">Cursos</h2>
-				<p>Selecciona el curs que vols consultar</p>
-				<ul class="list-group list-group-flush list-unstyled ps-0">
-					<c:forEach items="${cursos}" var="curso">
-						<li class="list-group-item list-group-item-action">${curso.nombre()}
-							<a class="px-4 m-2 btn btn-primary"
-							href="formulario?id=${curso.id()}">Inscripció</a>
-							<a class="px-4 m-3 btn btn-secundary"
-							href="listado?id=${curso.id()}">Llista alumnes</a>
-						</li>
+				<h2 class="text-body-emphasis">Alumnes de ${curso.nombre()}</h2>
+				<p>Selecciona l'alumne que vols consultar</p>
+				<ul class="list-group list-group-flush ps-0">
+					<c:forEach items="${alumnos}" var="alumno">
+						</a>
+						<li class="list-group-item list-group-item-action"><a
+							class="px-4 m-3 btn btn-secundary"
+							href="formulario?id-alumno=${alumno.id()}">${alumno.id()} :
+								${alumno.nombre()} ${alumno.apellido()}</a></li>
 					</c:forEach>
-					
-					<a class="px-4 m-5 btn btn-secundary"
-							href="formulario">Nou curs</a>
 				</ul>
+
 
 			</div>
 

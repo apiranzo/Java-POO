@@ -38,11 +38,11 @@
 					<ul class="navbar-nav me-auto mb-2 mb-lg-0">
 						<li class="nav-item"><a class="nav-link active"
 							aria-current="page" href="#">Incici</a></li>
-						<li class="nav-item"><a class="nav-link" href="#">Cursos</a>
+						<li class="nav-item"><a class="nav-link" href="http://localhost:8080/fullstack/cursos">Cursos</a>
 						</li>
-						<li class="nav-item"><a class="nav-link" href="#">Alumnes</a>
+						<li class="nav-item"><a class="nav-link" href="http://localhost:8080/fullstack/listado">Alumnes</a>
 						</li>
-						<li class="nav-item"><a class="nav-link" href="#">Formularis</a>
+						<li class="nav-item"><a class="nav-link" href="http://localhost:8080/fullstack/formulario">Formularis</a>
 						</li>
 					</ul>
 				</div>
@@ -60,35 +60,46 @@
 			<div class="modal-dialog" role="document">
 				<div class="modal-content rounded-4 shadow">
 					<div class="modal-header p-5 pb-4 border-bottom-0">
-						<h1 class="fw-bold mb-0 fs-2">Formulari d'inscripció</h1>
+						<c:if test="${curso != null}">
+							<h1 class="fw-bold mb-0 fs-2">Alta en ${curso.nombre()} de nuevo alumno</h1>
+						</c:if>
+						<c:if test="${alumno != null}">
+							<h1 class="fw-bold mb-0 fs-2">Dades de ${alumno.nombre()}</h1>
+						</c:if>
 					</div>
+
 
 					<div class="modal-body p-5 pt-0">
 						<form action="formulario" method="post" class="">
 							<div class="form-floating mb-3">
 								<input name="id-curso" type="text" value="${curso.id()}"
-									type="number" class="form-control rounded-3" id="floatingInput">
+									type="hidden" class="form-control rounded-3" id="floatingInput">
 								<label for="floatingInput">ID Curs</label>
 							</div>
 							<div class="form-floating mb-3">
+								<input name="id" type="text" value="${alumno.id()}"
+									type="hidden" class="form-control rounded-3" id="floatingInput">
+								<label for="floatingInput">ID Alumno</label>
+							</div>
+							<div class="form-floating mb-3">
 								<input name="nombre" type="text" class="form-control rounded-3"
-									id="floatingInput" placeholder="Nom"> <label
+									id="floatingInput" placeholder="Nom" value="${alumno.nombre()}"> <label
 									for="floatingInput">Nom</label>
 							</div>
 							<div class="form-floating mb-3">
 								<input name="apellidos" type="text"
 									class="form-control rounded-3" id="floatingPassword"
-									placeholder="Cognoms"> <label for="floatingPassword">Cognoms</label>
+									placeholder="Cognoms" value="${alumno.apellido()}"> <label for="floatingPassword">Cognoms</label>
 							</div>
 							<div class="form-floating mb-3">
 								<input name="fecha-nacimiento" type="date"
 									class="form-control rounded-3" id="floatingdate"
-									placeholder="Data de naixement"> <label for="date">Data
+									placeholder="Data de naixement" value="${alumno.fechaNacimiento()}"> <label for="date">Data
 									de naixement</label>
 							</div>
 							<hr class="my-4">
 							<button class="w-100 mb-2 btn btn-lg rounded-3 btn-primary"
-								type="submit">Inscriure'm</button>
+								type="submit">${curso != null ? "Inscriure'm" : 'Guardar' }</button>
 							<small class="text-body-secondary">By clicking Sign up,
 								you agree to the terms of use.</small>
 						</form>

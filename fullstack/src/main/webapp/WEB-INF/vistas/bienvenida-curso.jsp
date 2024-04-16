@@ -38,11 +38,11 @@
 					<ul class="navbar-nav me-auto mb-2 mb-lg-0">
 						<li class="nav-item"><a class="nav-link active"
 							aria-current="page" href="#">Incici</a></li>
-						<li class="nav-item"><a class="nav-link" href="#">Cursos</a>
+						<li class="nav-item"><a class="nav-link" href="http://localhost:8080/fullstack/cursos">Cursos</a>
 						</li>
-						<li class="nav-item"><a class="nav-link" href="#">Alumnes</a>
+						<li class="nav-item"><a class="nav-link" href="http://localhost:8080/fullstack/listado">Alumnes</a>
 						</li>
-						<li class="nav-item"><a class="nav-link" href="#">Formularis</a>
+						<li class="nav-item"><a class="nav-link" href="http://localhost:8080/fullstack/formulario">Formularis</a>
 						</li>
 					</ul>
 				</div>
@@ -51,8 +51,13 @@
 	</header>
 
 	<main>
-		<h1 class="text-body-emphasis">Hola ${alumno.nombre()}, te has
-			dado de alta en el curso ${curso.nombre()}</h1>
+
+		<h1 class="text-body-emphasis">
+			Hola ${alumno.nombre()},
+			<c:if test="${curso != null}">
+				t'has donat d'alta en ${curso.nombre()} 
+			</c:if>
+		</h1>
 
 		<hr class="col-3 col-md-2 mb-5">
 
@@ -60,17 +65,21 @@
 			<div class="col-md-6">
 				<h2 class="text-body-emphasis">Informació personal</h2>
 				<ul class="list-unstyled ps-0">
+					<li>Id: ${alumno.id()}</li>
 					<li>Nom: ${alumno.nombre()}</li>
 					<li>Cognom: ${alumno.apellido()}</li>
 					<li>Data de neixement: ${alumno.fechaNacimiento()}</li>
+				<li>${alumnoConId.nombre()}</li>	
 				</ul>
+				<a class="px-4 icon-link mb-1 btn btn-primary"
+					href="formulario?id-alumno=${alumno.id()}">Modificar dades</a>
 			</div>
 			<div class="col-md-6">
 				<h2 class="text-body-emphasis">Els teus cursos</h2>
 				<ul class="list-unstyled ps-0">
-					<li>Nom: ${alumno.nombre()}</li>
-					<li>Cognom: ${alumno.apellido()}</li>
-					<li>Data de neixement: ${alumno.fechaNacimiento()}</li>
+					<c:forEach items="${cursosAlumno}" var="cursosAlumno">
+						<li>ID: ${cursosAlumno.id()} - ${cursosAlumno.nombre()}</li>
+					</c:forEach>
 				</ul>
 			</div>
 
